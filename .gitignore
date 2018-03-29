@@ -12,6 +12,5 @@ job
 *.sublime-workspace
 *.sublime-project
 LOG_test/*
-data/*
 bck/*
 *.jpg

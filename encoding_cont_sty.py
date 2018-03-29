@@ -20,8 +20,7 @@ from sklearn import random_projection
 
 # parameters
 batch_size_all = 1
-batch_size_quary = 1
-best_simalr = 10
+
 
 ############################ UDF #######################
 
