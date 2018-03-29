@@ -89,7 +89,7 @@ with tf.device('/gpu'):
 
 
 main_dir = "sample_icons/"
-dir_num = os.listdir(main_dir)[0:1]
+dir_num = os.listdir(main_dir)[int(sys.argv[1]):int(sys.argv[2])]
 
 # create a new random projection matrix for each batch
 transformer = random_projection.SparseRandomProjection(n_components=4096)
