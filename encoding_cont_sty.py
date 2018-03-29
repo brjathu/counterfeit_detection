@@ -93,9 +93,9 @@ with tf.device('/gpu'):
 dir_num = os.listdir(icon_location)[int(sys.argv[1]):int(sys.argv[2])]
 
 # create a new random projection matrix for each batch
-transformer = random_projection.SparseRandomProjection(n_components=4096)
+# transformer = random_projection.SparseRandomProjection(n_components=4096)
 # use the same random projection matrix for each bach
-# transformer = pickle.load(open("transformer.pickle", "rb"))
+transformer = pickle.load(open("transformer.pickle", "rb"))
 
 
 with tf.Session() as sess:
@@ -116,8 +116,8 @@ with tf.Session() as sess:
             style_mat[counter] = np_style1
             counter += 1
 
-        rp_mat = transformer.fit_transform(style_mat)
-        # rp_mat = transformer.transform(style_mat)
+        # rp_mat = transformer.fit_transform(style_mat)
+        rp_mat = transformer.transform(style_mat)
         Big_file[:, 4098:] = rp_mat
         np.save(store_location + "cont_sty1/Big_file_" + dir_1 + ".npy", Big_file)
 
