@@ -20,7 +20,9 @@ from sklearn import random_projection
 
 # parameters
 batch_size_all = 1
-
+icon_location = "sample_icons/"
+store_location = "data/"
+os.system("mkdir " + store_location + "/cont_sty1")
 
 ############################ UDF #######################
 
@@ -88,8 +90,7 @@ with tf.device('/gpu'):
     tf_content = vgg.fc7
 
 
-main_dir = "sample_icons/"
-dir_num = os.listdir(main_dir)[int(sys.argv[1]):int(sys.argv[2])]
+dir_num = os.listdir(icon_location)[int(sys.argv[1]):int(sys.argv[2])]
 
 # create a new random projection matrix for each batch
 transformer = random_projection.SparseRandomProjection(n_components=4096)
@@ -99,7 +100,7 @@ transformer = random_projection.SparseRandomProjection(n_components=4096)
 
 with tf.Session() as sess:
     for dir_1 in dir_num:
-        dir_2 = main_dir + str(dir_1)
+        dir_2 = icon_location + str(dir_1)
         icons_name = os.listdir(dir_2)
         Big_file = np.ndarray((len(icons_name), 2 + 4096 * 2), dtype=object)
 
@@ -118,7 +119,7 @@ with tf.Session() as sess:
         rp_mat = transformer.fit_transform(style_mat)
         # rp_mat = transformer.transform(style_mat)
         Big_file[:, 4098:] = rp_mat
-        np.save("data/cont_sty1/Big_file_" + dir_1 + ".npy", Big_file)
+        np.save(store_location + "cont_sty1/Big_file_" + dir_1 + ".npy", Big_file)
 
 
 pickle.dump(transformer, open("transformer.pickle", "wb"))
