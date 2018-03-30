@@ -122,4 +122,4 @@ with tf.Session() as sess:
         np.save(store_location + "cont_sty1/Big_file_" + dir_1 + ".npy", Big_file)
 
 
-pickle.dump(transformer, open("transformer.pickle", "wb"))
+# pickle.dump(transformer, open("transformer.pickle", "wb"))
